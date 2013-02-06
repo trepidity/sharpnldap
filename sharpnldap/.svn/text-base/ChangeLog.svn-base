@@ -1,0 +1,42 @@
+2010-08-18  jjennings  <${AuthorEmail}>
+
+	* sharpnldap.csproj: 
+
+2010-08-17  jjennings  <${AuthorEmail}>
+
+	* sharpnldap.pidb: methods for search for user objects
+
+	* sharpnldap.userprefs: 
+
+2010-08-16  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* sharpnldap.csproj: 
+
+2010-08-14  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* tests: Created a test structure for the objects. Will be
+	  keeping enhancing the tests as I move forward.
+
+	* sharpnldap.sln:
+	* sharpnldap.csproj: 
+
+2010-07-01  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* sharpnldap.pidb:
+	* sharpnldap.userprefs: 
+
+2010-06-26  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* sharpnldap.sln:
+	* sharpnldap.pidb:
+	* sharpnldap.userprefs: 
+
+2010-06-26  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* src/ATTRNAME.cs: title attribute
+
+2010-06-24  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* sharpnldap.sln:
+	* sharpnldap.csproj: 
+

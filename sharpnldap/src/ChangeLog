@@ -1,0 +1,59 @@
+2010-08-17  jjennings  <${AuthorEmail}>
+
+	* LDAP.cs: 
+
+2010-08-16  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAPUser.cs: changed method for ndsHomeDirectory so that
+	  it's read only and the values is only populated by
+	  parseNdsHomeDirectory
+
+	* LDAP.cs: new code to support writting changes to eDirectory
+	  for ZFD Application objects
+
+	* LDAPObject.cs: Added code to return the CN value from the DN
+	  if the CN wasn't populated. Kinda a bug fix
+
+2010-08-14  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAPUser.cs:
+	* LDAPGroup.cs:
+	* LDAPZFDApp.cs:
+	* LDAPObject.cs:
+	* LDAPContainer.cs: Contains the OBJECTCLASS value
+
+	* LDAP.cs: New methods to modify ZFD Application Objects. The
+	  method should compare exisitng values and compare to values
+	  in the object being saved. The methods are not complete, but
+	  only the structure exists
+
+2010-07-25  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAP.cs: removed a useless debug entry
+
+2010-07-01  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAPUser.cs:
+	* ATTRNAME.cs: 
+
+2010-07-01  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAP.cs:
+	* LDAPUser.cs:
+	* ATTRNAME.cs: 
+
+2010-06-26  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAPUser.cs: 
+
+2010-06-26  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* ATTRNAME.cs: 
+
+2010-06-26  Jared L Jennings  <jaredljennings@gmail.com>
+
+	* LDAP.cs:
+	* AuthUser.cs:
+	* LDAPUser.cs:
+	* StringExtensions.cs: 
+

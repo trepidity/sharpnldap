@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/27/trunk/sharpnldap/src
+END
+ATTRNAME.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/13/trunk/sharpnldap/src/ATTRNAME.cs
+END
+ZFDNALFlags.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/sharpnldap/src/ZFDNALFlags.cs
+END
+LDAPGroup.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/15/trunk/sharpnldap/src/LDAPGroup.cs
+END
+LDAPUser.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/23/trunk/sharpnldap/src/LDAPUser.cs
+END
+AuthUser.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/10/trunk/sharpnldap/src/AuthUser.cs
+END
+LDAP.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/21/trunk/sharpnldap/src/LDAP.cs
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/17/trunk/sharpnldap/src/ChangeLog
+END
+LDAPContainer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/15/trunk/sharpnldap/src/LDAPContainer.cs
+END
+LDAPConnOpts.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/sharpnldap/src/LDAPConnOpts.cs
+END
+LDAPZFDApp.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/15/trunk/sharpnldap/src/LDAPZFDApp.cs
+END
+LDAPObject.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/16/trunk/sharpnldap/src/LDAPObject.cs
+END
+LDAPObjectType.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/10/trunk/sharpnldap/src/LDAPObjectType.cs
+END

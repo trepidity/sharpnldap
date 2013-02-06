@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{00CD1C5F-6A4F-45F1-9E32-DAFEF181C6AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>sharpnldap</RootNamespace>
+    <AssemblyName>sharpnldap</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\builds\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\builds\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="lib\" />
+    <Folder Include="src\util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\LDAP.cs" />
+    <Compile Include="src\LDAPUser.cs" />
+    <Compile Include="src\AuthUser.cs" />
+    <Compile Include="src\ATTRNAME.cs" />
+    <Compile Include="src\ZFDNALFlags.cs" />
+    <Compile Include="src\LDAPObjectType.cs" />
+    <Compile Include="src\LDAPContainer.cs" />
+    <Compile Include="src\LDAPGroup.cs" />
+    <Compile Include="src\LDAPZFDApp.cs" />
+    <Compile Include="src\LDAPObject.cs" />
+    <Compile Include="src\LDAPConnOpts.cs" />
+    <Compile Include="src\util\AttributeUtil.cs" />
+    <Compile Include="src\util\EnumUtils.cs" />
+    <Compile Include="src\util\Logger.cs" />
+    <Compile Include="src\util\StringExtensions.cs" />
+    <Compile Include="src\util\ZFDAppUtils.cs" />
+    <Compile Include="tests\testLDAPZFDApp.cs" />
+    <Compile Include="tests\testLDAPUser.cs" />
+    <Compile Include="tests\TestZFDApp.cs" />
+    <Compile Include="src\util\LDAPUserUtils.cs" />
+    <Compile Include="src\util\LDAPUserAttrChange.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="lib\Novell.Directory.Ldap.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Novell.Directory.Ldap, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Novell.Directory.Ldap.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System" />
+    <Reference Include="Mono.Security" />
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
+  </ItemGroup>
+</Project>

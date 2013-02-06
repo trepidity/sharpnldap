@@ -1,0 +1,40 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/LDAPUser.cs">
+    <Files>
+      <File FileName="src/LDAP.cs" Line="118" Column="39" />
+      <File FileName="src/LDAPUser.cs" Line="234" Column="49" />
+      <File FileName="tests/testLDAPUser.cs" Line="39" Column="18" />
+      <File FileName="tests/TestZFDApp.cs" Line="68" Column="37" />
+      <File FileName="src/util/ZFDAppUtils.cs" Line="114" Column="1" />
+      <File FileName="src/util/AttributeUtil.cs" Line="148" Column="7" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="sharpnldap" expanded="True">
+            <Node name="lib" expanded="True" />
+            <Node name="src" expanded="True">
+              <Node name="util" expanded="True" />
+              <Node name="LDAPUser.cs" selected="True" />
+            </Node>
+            <Node name="tests" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

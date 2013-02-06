@@ -1,0 +1,193 @@
+Index: src/LDAPUser.cs
+===================================================================
+--- src/LDAPUser.cs	(revision 16)
++++ src/LDAPUser.cs	(working copy)
+@@ -45,26 +45,24 @@
+ 			dn = x;
+ 		}
+ 		private List<string> memberOf;
+-		
+-		private const string objectclass = "person";
+-		public override string OBJECTCLASS
+-		{
+-			get{ 
+-				return objectclass;
+-			}
+-		}
+-		
+ 		/// <summary>
+ 		/// Contains the value which is read directly from eDirectory
+ 		/// </summary>	
+-		private string ndsHomeDirectory;
+-		
+-		public string getNdsHomeDirectory()
+-		{ 
+-			return this.ndsHomeDirectory;
+-		}
++		public string ndsHomeDirectory 	{ get;set; }
++		/// <summary>
++		/// The volume name of a server that holds the users home directory
++		/// <value>represents ndsHomeVolume</value>
++		/// </summary>
+ 		public string ndsHomeVolume		{ get;set; }
++		/// <summary>
++		/// Holds the path inside the volume of the users home directory.
++		/// This is any folder below the volume including the users home folder.
++		/// e.g. /users/students/jjennings
++		/// </summary>
+ 		public string ndsHomePath		{ get;set; }
++		/// <summary>
++		/// The server name holding the users home directory.
++		/// </summary>
+ 		public string ndsHomeServer		{ get;set; }
+ 		public string DEPARTMENTNUMBER	{ get;set; }
+ 		public string DISPLAYNAME		{ get;set; }
+@@ -93,7 +91,7 @@
+ 			}
+ 			else {
+ 				string[] a = Regex.Split(s, @",");
+-				string b = stripNdsHomeDirectory_FQN(a[0]); // remove the cn=
++				string b = stripFQN(a[0]); // remove the cn=
+ 				string[] c = Regex.Split(b, @"_"); // remove the volume from the server
+ 				
+ 				if (c[0] != null) // get the server from the string
+@@ -107,7 +105,7 @@
+ 				 */
+ 				string p = s.SubstringAfter("#").SubstringAfter("#");
+ 				ndsHomePath = p;
+-				this.ndsHomeDirectory = s;
++				ndsHomeDirectory = s;
+ 			}
+ 			
+ 		}
+@@ -163,16 +161,17 @@
+ 		}
+ 
+ 		/// <summary>
+-		/// Strings the cn= or whatever object type that is normally specified in FQN LDAP syntax strings
++		/// <c>stripFQN</c>strips the cn= value or whatever object type that is normally specified in FQN LDAP syntax strings
+ 		/// returns the string of whatever was passed after the = character
+ 		/// </summary>
++		/// <remarks>This method can probably be replaced by AttributeUtil.ParseCNfromDN</remarks>
+ 		/// <param name="s">
+ 		/// A <see cref="System.String"/>
+ 		/// </param>
+ 		/// <returns>
+ 		/// A <see cref="System.String"/>
+ 		/// </returns>
+-		private string stripNdsHomeDirectory_FQN(string s) {
++		private string stripFQN(string s) {
+ 			string[] a = Regex.Split(s, @"=");
+ 			Logger.Debug("stripFQN {0}", a[1]);
+ 			return a[1];
+
+Index: src/LDAP.cs
+===================================================================
+--- src/LDAP.cs	(revision 17)
++++ src/LDAP.cs	(working copy)
+@@ -29,7 +29,6 @@
+ //
+ using System;
+ using System.Collections.Generic;
+-using System.Collections;
+ using Syscert = System.Security.Cryptography.X509Certificates;
+ using Novell.Directory.Ldap;
+ using Novell.Directory.Ldap.Utilclass;
+@@ -140,6 +139,7 @@
+ 		/// 
+ 		/// Must specify the baseDN to search from.
+ 		/// </summary>
++		/// <exception cref="Exception">Exception is thrown if no users are found</exception>
+ 		/// <param name="cn">
+ 		/// A <see cref="System.String"/>
+ 		/// </param>
+@@ -162,6 +162,7 @@
+ 		/// Specify the LDAP search criteria. SUB, One, BASE
+ 		/// These control if the search will searc subcontainers or not
+ 		/// </summary>
++		/// <exception cref="Exception">Exception is thrown if no users are found</exception>
+ 		/// <param name="cn">
+ 		/// A <see cref="System.String"/>
+ 		/// </param>
+@@ -190,6 +191,7 @@
+ 		/// The param allAttrs specifies whether or not the property unknown attributes is populated
+ 		/// with attributes that have no match method (property in the LDAPUser object)
+ 		/// </summary>
++		/// <exception cref="Exception">Exception is thrown if no users are found</exception>
+ 		/// <param name="cn">
+ 		/// A <see cref="System.String"/>
+ 		/// </param>
+@@ -364,6 +366,7 @@
+ 				Logger.Debug("read dn {0}", x);
+ 				LdapEntry le = ldapConn.Read(x);
+ 				Logger.Debug("LDAP Entry Read {0}", le.getAttribute("cn").StringValue);
++				Logger.Debug("LDAP Entry Read Attribute count {0}", le.getAttributeSet().Count); 
+ 				members = AttributeUtil.getListofAttr(le.getAttributeSet(), ATTRNAME.MEMBER);
+ 			}
+ 			return members;
+@@ -539,47 +542,5 @@
+ 			}	
+ 			return bHowToProceed;
+ 		}	
+-		
+-		///<summary>Returns the specified object. Objects are specified by the DN.</summary>
+-		public LDAPZFDApp getZFDApp(string dn) {
+-			LdapEntry nextEntry = lc.Read(dn);
+-			LDAPZFDApp app = AttributeUtil.iterZFDAppAttrs(nextEntry.getAttributeSet(), nextEntry.DN);
+-			Logger.Debug("getZFDApp read entry {0}", nextEntry.DN);
+-			return app;
+-		}
+-		
+-		/// <summary>
+-		/// Saves changes made to existing ZFD 7 Application objects
+-		/// </summary>
+-		/// <param name="apps">
+-		/// A <see cref="List<LDAPZFDApp>"/>
+-		/// </param>
+-		public void modifyZFDApp(List<LDAPZFDApp> apps) {
+-			foreach (LDAPZFDApp app in apps)
+-				modifyZFDApp(app);
+-		}
+-		/// <summary>
+-		/// Saves changes made to an existing ZFD 7 Application object
+-		/// </summary>
+-		/// <param name="app">
+-		/// A <see cref="LDAPZFDApp"/>
+-		/// </param>
+-		public void modifyZFDApp(LDAPZFDApp app) {
+-			ArrayList modList;		
+-			LDAPZFDApp existingApp = getZFDApp(app.getDN());
+-			modList = ZFDAppUtils.BuildZFDAppModifications(app, existingApp);
+-			LdapModification[] mods = new LdapModification[modList.Count]; 	
+-			Type mtype=Type.GetType("Novell.Directory.LdapModification");
+-			mods = (LdapModification[])modList.ToArray(typeof(LdapModification));
+-		}
+-		
+-		/// <summary>
+-		/// Write list of LdapModifications to eDirectory
+-		/// </summary>
+-		private void WriteLdapChanges(LdapModification[] mods, string dn) {
+-			//Modify the entry in the directory
+-			lc.Modify ( dn, mods );	
+-		}
+-		
+ 	}
+ }
+\ No newline at end of file
+
+Index: src/ChangeLog
+===================================================================
+--- src/ChangeLog	(revision 17)
++++ src/ChangeLog	(working copy)
+@@ -1,5 +1,10 @@
+ 2010-08-17  jjennings  <${AuthorEmail}>
+ 
++	* LDAP.cs:
++	* LDAPUser.cs: 
++
++2010-08-17  jjennings  <${AuthorEmail}>
++
+ 	* LDAP.cs: 
+ 
+ 2010-08-16  Jared L Jennings  <jaredljennings@gmail.com>
+
